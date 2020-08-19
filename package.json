@@ -2,6 +2,11 @@
   "version": "0.0.0",
   "description": "[pure component](https://reactjs.org/docs/react-api.html#reactpurecomponent) > React.PureComponent is similar to React.Component. The difference between them is that React.Component doesn’t implement shouldComponentUpdate(), but React.PureComponent implements it with a shallow prop and state comparison",
   "main": "index.js",
+  "husky": {
+    "hooks": {
+      "pre-push": "npm test"
+    }
+  },
   "scripts": {
     "start": "npm run build-css && concurrently --kill-others \"npm run serve\" \"npm run sass-watch\"",
     "serve": "env $(cat .env | xargs) budo src/index.js:bundle.js --pushstate --dir=public --live -- -p esmify -t [ babelify --presets [ \"@babel/preset-env\" ] ] -t [ envify --NODE_ENV development ] -dv",
