@@ -1,4 +1,5 @@
 {
+  "name": "",
   "version": "0.0.0",
   "description": "[pure component](https://reactjs.org/docs/react-api.html#reactpurecomponent) > React.PureComponent is similar to React.Component. The difference between them is that React.Component doesn’t implement shouldComponentUpdate(), but React.PureComponent implements it with a shallow prop and state comparison",
   "main": "index.js",
@@ -49,7 +50,6 @@
     "uglifyify": "^5.0.2",
     "unassertify": "^2.1.1"
   },
-  "name": "template-react",
   "directories": {
     "test": "test"
   },
