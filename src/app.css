@@ -1,0 +1,10 @@
+#root {
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+.controls {
+  margin: 1rem auto;
+  display: flex;
+  gap: 1rem;
+}
