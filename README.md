@@ -1,8 +1,65 @@
-# React + TypeScript + Vite
+# Template React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A template for React projects.
 
-Currently, two official plugins are available:
+<details><summary><h2>Contents</h2></summary>
+
+<!-- toc -->
+
+- [Build](#build)
+- [Develop](#develop)
+- [Notes](#notes)
+  * [Environments](#environments)
+  * [Helpful Commands](#helpful-commands)
+- [React Compiler](#react-compiler)
+- [Expanding the ESLint configuration](#expanding-the-eslint-configuration)
+
+<!-- tocstop -->
+
+</details>
+
+## Build
+
+Build the app for production.
+
+```sh
+npm run build
+```
+
+Vite handles TypeScript for bundling, but it doesn’t do type checking.
+It just strips types and runs the code through esbuild. The command
+`tsc -b` does the type checking.
+
+
+## Develop
+
+Start a `vite` localhost server.
+
+```sh
+npm start
+```
+
+## Notes
+
+### Environments
+
+4 environments: `production`, `staging`, `test`, and `development`. These
+correspond to the `import.meta.env` variable in the browser. This is mostly
+used for deciding if things are logged to the browser console.
+
+
+### Helpful Commands
+
+* `lsof -ti :8888 | xargs kill` - Kill process on port 8888
+* `lsof -ti :8888 | xargs kill` -9 - Force kill if it won't die
+* `pkill -f vite` - Kill any process matching "vite"
+
+
+
+
+-------
+
+
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
