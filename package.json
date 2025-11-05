@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "start": "concurrently --kill-others \"npx ntl functions:serve --port=9999 --debug\" \"npx vite --mode development\"",
-    "build": "mkdir -p ./public && rm -rf ./public/* && vite build",
+    "build": "mkdir -p ./public && rm -rf ./public/* && vite build --mode production",
     "build:staging": "mkdir -p ./public && rm -rf ./public/* && vite build --mode staging",
     "lint": "eslint .",
     "preview": "vite preview",

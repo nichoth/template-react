@@ -68,14 +68,31 @@ In the tests we pass in a mock API server.
 
 -------
 
-## Notes
+## Notes & Opinions
 
 ### Environments
 
 4 environments: `production`, `staging`, `test`, and `development`. These
 correspond to the `import.meta.env` variable in the browser. This is mostly
-used for deciding if things are logged to the browser console.
+used for deciding if things are logged to the browser console. Logging is
+enabled for the staging branch and the local dev site.
 
+### Headers
+
+Response headers are configured to use either `src/_headers/production` or
+`src/_headers/staging`, depending on the deploy context. This is configured
+in [./netlify.toml](./netlify.toml).
+
+### Debug Logs
+
+We use [`@substrate-system/debug`](https://github.com/substrate-system/debug)
+for logging. It looks at the env variable `import.meta.env.DEV`. See
+[`isDev` function](./src/app.tsx#L102)
+
+### Redirects
+
+Redirects are configured as for [an SPA](https://developer.mozilla.org/en-US/docs/Glossary/SPA).
+Everything will redirect to the index page. This is configured in `netlify.toml`.
 
 ### Lint
 
