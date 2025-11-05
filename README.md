@@ -1,6 +1,14 @@
 # Template React
 
-A template for React projects.
+[![tests](https://img.shields.io/github/actions/workflow/status/nichoth/template-react/nodejs.yml?style=flat-square)](https://github.com/nichoth/template-react/actions/workflows/nodejs.yml)
+
+
+A template for React projects. This was created with `npm create vite@latest`
+with Typescript + React, and I added some opinions too &mdash;
+[Netlify](https://www.netlify.com/) as host, Netlify lambda functions,
+[@substrate-system/tapout](https://github.com/substrate-system/tapout) for tests,
+and [@preact/signals-react](https://github.com/preactjs/signals/tree/main/packages/react)
+for application state.
 
 <details><summary><h2>Contents</h2></summary>
 
@@ -8,11 +16,11 @@ A template for React projects.
 
 - [Build](#build)
 - [Develop](#develop)
+- [Test](#test)
 - [Notes](#notes)
   * [Environments](#environments)
-  * [Helpful Commands](#helpful-commands)
+  * [Lint](#lint)
 - [React Compiler](#react-compiler)
-- [Expanding the ESLint configuration](#expanding-the-eslint-configuration)
 
 <!-- tocstop -->
 
@@ -39,6 +47,27 @@ Start a `vite` localhost server.
 npm start
 ```
 
+Use the `@substrate-system/debug` module for logging.
+
+
+-------
+
+
+## Test
+
+Run some tests locally in a browser:
+
+```sh
+npm test
+```
+
+This uses [@substrate-system/tapout](https://github.com/substrate-system/tapout)
+to run tests in a browser environment.
+
+In the tests we pass in a mock API server.
+
+-------
+
 ## Notes
 
 ### Environments
@@ -48,83 +77,21 @@ correspond to the `import.meta.env` variable in the browser. This is mostly
 used for deciding if things are logged to the browser console.
 
 
-### Helpful Commands
+### Lint
 
-* `lsof -ti :8888 | xargs kill` - Kill process on port 8888
-* `lsof -ti :8888 | xargs kill` -9 - Force kill if it won't die
-* `pkill -f vite` - Kill any process matching "vite"
+Lint, and fix everything fixable:
 
-
+```sh
+npm run lint -- --fix
+```
 
 
 -------
 
 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
 ## React Compiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+The React Compiler is not enabled on this template because of its impact on
+dev & build performances. To add it, see
+[this documentation](https://react.dev/learn/react-compiler/installation).

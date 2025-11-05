@@ -1,7 +1,7 @@
-import { useCallback } from 'react'
+import { useCallback, type FunctionComponent } from 'react'
 import { signal, useSignal } from '@preact/signals-react'
-import ky from 'ky'
 import Debug from '@substrate-system/debug'
+import { type Api } from './api'
 import { Button } from './components/button'
 import './app.css'
 
@@ -17,7 +17,7 @@ const count = signal(0)
  * Expose state for dev and staging
  */
 if (isDev()) {
-    debug(`${import.meta.env.MODE} mode`)
+    debug(`${import.meta.env?.MODE} mode`)
 
     // @ts-expect-error dev
     window.state = { count }
@@ -26,7 +26,7 @@ if (isDev()) {
     window.debug = debug
 }
 
-function App () {
+export const App:FunctionComponent<{ api:typeof Api }> = function App ({ api }) {
     const isSpinning = useSignal<boolean>(false)
     const response = useSignal<string|null>(null)
 
@@ -35,7 +35,7 @@ function App () {
         isSpinning.value = true
 
         try {
-            const res = await api()
+            const res = await api.get()
             debug('got a response...', res)
             response.value = res.hello
         } catch (_err) {
@@ -97,15 +97,8 @@ function App () {
     )
 }
 
-async function api ():Promise<{ hello:string }> {
-    // example of calling our API
-    const json = await ky.get('/api/example').json<{ hello:string }>()
-
-    return json
-}
-
 export default App
 
 function isDev ():boolean {
-    return (import.meta.env.DEV || import.meta.env.MODE !== 'production')
+    return (import.meta.env?.DEV || import.meta.env?.MODE !== 'production')
 }
