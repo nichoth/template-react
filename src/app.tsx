@@ -7,15 +7,23 @@ import './app.css'
 
 export const EM_DASH = '\u2014'
 export const NBSP = '\u00A0'
-const debug = Debug(import.meta.env.DEV)
+const debug = Debug(isDev())
 
 // Whenever the `count` signal is updated,
 // the component will re-render automatically
 const count = signal(0)
 
-if (import.meta.env.DEV) {
+/**
+ * Expose state for dev and staging
+ */
+if (isDev()) {
+    debug(`${import.meta.env.MODE} mode`)
+
     // @ts-expect-error dev
     window.state = { count }
+
+    // @ts-expect-error dev
+    window.debug = debug
 }
 
 function App () {
@@ -97,3 +105,7 @@ async function api ():Promise<{ hello:string }> {
 }
 
 export default App
+
+function isDev ():boolean {
+    return (import.meta.env.DEV || import.meta.env.MODE !== 'production')
+}
