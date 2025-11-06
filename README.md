@@ -93,6 +93,15 @@ for logging. It looks at the env variable `import.meta.env.DEV`. See
 
 Redirects are configured as for [an SPA](https://developer.mozilla.org/en-US/docs/Glossary/SPA).
 Everything will redirect to the index page. This is configured in `netlify.toml`.
+See the `[[redirects]]` key:
+
+```toml
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200 
+```
+
 
 ### Lint
 
