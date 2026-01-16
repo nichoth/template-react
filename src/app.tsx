@@ -1,7 +1,4 @@
-import React, {
-    useCallback,
-    type FunctionComponent,
-} from 'react'
+import React, { useCallback, type FunctionComponent } from 'react'
 import { signal, useSignal } from '@preact/signals-react'
 import Debug from '@substrate-system/debug'
 import { type Api } from './api'
@@ -51,7 +48,6 @@ export const App:FunctionComponent<{ api:typeof Api }> = function App ({ api }) 
 
     const setCount = useCallback(async (ev:React.MouseEvent) => {
         ev.preventDefault()
-
         count.value++
     }, [])
 
